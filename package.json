@@ -1,0 +1,10 @@
+{
+  "name": "apple-design",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "design:build": "./design/build.sh hyalite",
+    "design:build:all": "./design/build.sh",
+    "design:shot": "./design/shot.sh hyalite"
+  }
+}

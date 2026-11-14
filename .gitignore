@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+dist/
+
+# Deno binary + module cache: re-download by running ./design/build.sh
+design/.bin/
+design/.deno/
+
+# Headless-Chrome profile + screenshots
+design/.chrome-tmp/
+design/shots/
+
+# 参考底图：本机可用，不要入库（Apple 素材不允许再分发）
+design/.ref/wallpapers/
