@@ -18,20 +18,20 @@ design/
     jsx/             极简 JSX runtime（只在构建时跑）
     hyalite/         本项目主体：组件、页面、client 驱动、vendor/hyalite.js 引擎
       presets.ts     玻璃参数预设（STANDARD 就是标准档）
-      components/    glass / ios / macos / standard / lab / hud / home / gallery
-      pages/01..07   每个页面一个 tsx
-    ios27/ macos27/ doubao/   被 hyalite 复用的工具与图标
-  pages/hyalite/     构建产物（可随时重生成）
+      components/    glass / ios / macos / standard / lab / hud / script
+      pages/03..06   每个页面一个 tsx
+    ios27/ macos27/ doubao/   只保留 hyalite 引用到的图标、交通灯、theme
+  pages/hyalite/     构建产物（已入库，可直接打开看）
   .ref/wallpapers/   两张壁纸底图（不入库，本机才有）
 .dsh/skills/         ui-design + general-rules（从源仓库 .agent/skills 复刻）
-docs/                hyalite 玻璃标准、后续计划
+docs/                hyalite 玻璃标准（参数真源）
 ```
 
 ## 构建
 
 ```bash
-./design/build.sh hyalite     # 只建 hyalite，约 5 秒
-./design/build.sh             # 建全部 kit（ios27 / macos27 / doubao / hyalite）
+./design/build.sh             # 建 hyalite 全部 4 页，约 5 秒
+./design/build.sh hyalite     # 同上（显式指定 kit）
 ./design/shot.sh hyalite/05-standard/standard    # 截图
 ```
 
@@ -46,19 +46,20 @@ docs/                hyalite 玻璃标准、后续计划
 | `06-standard-macos/standard-macos.html` | 同上，只有 macOS 组件 |
 | `03-ios/components.html` | iOS 实验台：参数面板、5 个预设、9 种底图、帧率测试 |
 | `04-macos/components.html` | macOS 实验台，同上 |
-| `07-ios-more/ios-more.html` | iOS 补充组件（目前是空脚手架，待填） |
 
 ## 已验证
 
 ```bash
-./design/build.sh hyalite
-shasum -a 256 -c <(原始仓库的 hash)   # 7/7 OK
+./design/build.sh
+shasum -a 256 -c <(来源仓库的 hash)   # 03/04/05/06 四页逐字节一致
 ```
 
 `deno` 二进制和 tailwindcss 缓存都已复制过来，构建**离线**可跑（首次换机则 build.sh 会经 127.0.0.1:7897 代理下载）。
 
 ## 与源仓库的差异
 
-- 只搬了 `design/`、`docs/hyalite-glass.md`、`docs/glass-gallery-next.md`、两个 skill；`figma/`（离线 Figma 参数层，约 300 MB）、`apps/`、`native/`、`macos-shots/` 没有搬。
+- 只搬了 `design/`、`docs/hyalite-glass.md`、两个 skill；`figma/`（离线 Figma 参数层，约 300 MB）、`apps/`、`native/`、`macos-shots/` 没有搬。
+- 页面只保留做好的 03-ios / 04-macos / 05-standard / 06-standard-macos；`01-edge-lab`、`02-home`、`07-ios-more` 是测试页，已连源码、client 驱动、`components/gallery.tsx` 一起删掉。
+- `system/` 只留 hyalite 用得到的 25 个文件；ios27 / macos27 / doubao 的页面源（178 个文件）已删，`build.ts` 的 `KITS` 也只剩 `hyalite`。
 - 因此 `ui-design` skill 里指向 `figma/reference/` 的查数步骤在本仓库不可用：参数看 `design/system/hyalite/presets.ts`（`STANDARD`）、`components/*.tsx` 里的注释和 `docs/hyalite-glass.md`。
-- `doubao` kit 的页面依赖 `design/.ref/doubao/` 真机截图（46 MB，未搬），单独建 doubao 会缺图；`hyalite` 不受影响。
+- 需要恢复某个 kit 时，从来源仓库连 `system/<kit>/` 一起搬，并把 kit 名加回 `build.ts` 的 `KITS`。

@@ -6,7 +6,7 @@ import type { Markup } from "./jsx/jsx-runtime.ts";
 import { COLOR, FONT_MONO, FONT_SANS } from "./theme.ts";
 import { compile } from "tailwindcss";
 
-const KITS = ["ios27", "macos27", "doubao", "hyalite"];
+const KITS = ["hyalite"];
 // Kits whose pages run JavaScript in the browser (live parameter labs). Every other kit stays zero-JS.
 const SCRIPTED_KITS = new Set(["hyalite"]);
 const systemDirectory = new URL("./", import.meta.url);
