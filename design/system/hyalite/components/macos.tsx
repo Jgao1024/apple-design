@@ -24,7 +24,7 @@ function Row(props: { gap?: number; children: Child }): Markup {
   return <div class="flex items-center" style={`gap:${props.gap ?? 10}px`}>{props.children}</div>;
 }
 
-function ToolbarButton(props: { mode: Mode; icon: IconName }): Markup {
+export function ToolbarButton(props: { mode: Mode; icon: IconName }): Markup {
   return (
     <Glass mode={props.mode} width={36} height={36} radius={18} class="grid place-items-center" style={`color:${ink(props.mode)}`}>
       <Icon name={props.icon} size={16} />
@@ -32,7 +32,7 @@ function ToolbarButton(props: { mode: Mode; icon: IconName }): Markup {
   );
 }
 
-function ToolbarSegmented(props: { mode: Mode; icons: IconName[] }): Markup {
+export function ToolbarSegmented(props: { mode: Mode; icons: IconName[] }): Markup {
   return (
     <Glass mode={props.mode} width={props.icons.length * 36 + 4} height={36} radius={18} class="flex items-center px-[2px]" style={`color:${ink(props.mode)}`}>
       {props.icons.map((icon, i) => (
@@ -42,7 +42,7 @@ function ToolbarSegmented(props: { mode: Mode; icons: IconName[] }): Markup {
   );
 }
 
-function ToolbarSearch(props: { mode: Mode; width: number }): Markup {
+export function ToolbarSearch(props: { mode: Mode; width: number }): Markup {
   return (
     <Glass mode={props.mode} width={props.width} height={36} radius={18} class="flex items-center gap-[6px] px-3" style={`color:${dim(props.mode)};${TEXT}`}>
       <Icon name="magnifyingglass" size={14} /><span>搜索</span>
@@ -84,7 +84,7 @@ export function WindowWithSidebar(props: { mode: Mode }): Markup {
   );
 }
 
-function PushButton(props: { mode: Mode; text: string; prominent?: boolean }): Markup {
+export function PushButton(props: { mode: Mode; text: string; prominent?: boolean }): Markup {
   return (
     <Glass
       mode={props.mode}
@@ -163,7 +163,7 @@ export function Menu(props: { mode: Mode }): Markup {
   );
 }
 
-function SwitchTrack(props: { mode: Mode; on: boolean; clicked?: boolean }): Markup {
+export function SwitchTrack(props: { mode: Mode; on: boolean; clicked?: boolean }): Markup {
   const left = props.on ? 54 - 2 - 32 : 2;
   return (
     <div class="relative h-6 w-[54px] rounded-full" style={`background:${props.on ? ACCENT : fill(props.mode, 0.1)}`}>
