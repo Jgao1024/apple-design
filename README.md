@@ -46,9 +46,7 @@ docs/                hyalite 玻璃标准、后续计划
 | `06-standard-macos/standard-macos.html` | 同上，只有 macOS 组件 |
 | `03-ios/components.html` | iOS 实验台：参数面板、5 个预设、9 种底图、帧率测试 |
 | `04-macos/components.html` | macOS 实验台，同上 |
-| `02-home/home.html` | 豆包首页的 hyalite 版 |
-| `01-edge-lab/edge-lab.html` | hyalite 官方剖面台复刻，用来理解每个参数 |
-| `07-ios-more/ios-more.html` | iOS 补充组件 |
+| `07-ios-more/ios-more.html` | iOS 补充组件（目前是空脚手架，待填） |
 
 ## 已验证
 

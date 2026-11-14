@@ -15,8 +15,6 @@
 | `06-standard-macos/standard-macos.html` | 同上，只有 macOS 组件（约 1.2 MB） |
 | `03-ios/components.html` | iOS 实验台：同样的组件，加参数面板、5 个预设、9 种底图、帧率测试 |
 | `04-macos/components.html` | macOS 实验台，结构同上 |
-| `02-home/home.html` | 豆包首页的 hyalite 版，带参数面板（还在用 hyalite 原版默认参数，不是标准档） |
-| `01-edge-lab/edge-lab.html` | hyalite 官方剖面台的复刻，用来理解每个参数 |
 
 ### 组件清单
 
@@ -111,7 +109,7 @@ design/system/hyalite/
   components/ios.tsx      iOS 组件        components/macos.tsx   macOS 组件
   components/lab.tsx      实验台：面板、底图、舞台、底色矩阵
   client/*.js             各页面的浏览器端驱动（构建时内联）
-  pages/                  01-edge-lab  02-home  03-ios  04-macos  05-standard  06-standard-macos
+  pages/                  03-ios  04-macos  05-standard  06-standard-macos  07-ios-more
   components/standard.tsx 两个标准页共用的排版和照片内联
 ```
 
