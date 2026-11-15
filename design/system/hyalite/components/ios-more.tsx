@@ -5,7 +5,7 @@ import { Icon, type IconName } from "../../ios27/components/icon.tsx";
 import { Glass } from "./glass.tsx";
 import { SymbolButton } from "./ios.tsx";
 
-// The rest of the iOS 27 components (pages/07-ios-more), drawn with the standard glass. Geometry is
+// The rest of the iOS 27 components (pages/showcase/ios), drawn with the standard glass. Geometry is
 // the ios27 kit's, from the Figma specs as recorded in design/system/ios27/components/*.tsx:
 //   status bar 402 x 62; toolbar top 54 (16 side padding, 44 buttons); bottom toolbar 84 (28 side
 //   padding, 48 buttons); large title 34 / 41 bold; page control 8 pt dots 8 apart in a 24 capsule

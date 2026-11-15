@@ -1,4 +1,4 @@
-// The specs shown on pages/09-json-render: one per component (JSON on the left, the glass render on
+// The specs shown on pages/json-render: one per component (JSON on the left, the glass render on
 // the right), the expression demos, the multimodal extensions, and the answers of the three chat screens.
 // Props names are the official ones (design/.ref/json-render/jr-shadcn.ts, jr-chat-catalog.ts).
 

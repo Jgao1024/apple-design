@@ -1,4 +1,4 @@
-// Driver for the component labs (pages/03-ios, pages/04-macos). Reads window.HL_CONFIG (presets,
+// Driver for the component labs (pages/lab/ios, pages/lab/macos). Reads window.HL_CONFIG (presets,
 // the platform's standard, the backdrops) from components/lab.tsx.
 //   · two parameter sets, Light and Dark; each .hl-glass follows the set of its data-mode
 //   · engine options re-attach that mode's glass (once per frame at most); fill / tone / shadow are

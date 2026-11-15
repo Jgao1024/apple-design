@@ -1,4 +1,4 @@
-// Driver for pages/09-json-render. Needs Hyalite, window.HL_STANDARD (presets.ts) and JR (jr-render.js).
+// Driver for pages/json-render. Needs Hyalite, window.HL_STANDARD (presets.ts) and JR (jr-render.js).
 //  1. Standard glass: the fill / shadow variables, and the engine options per mode.
 //  2. Glass is attached when it comes near the viewport and detached when the renderer removes it
 //     (the preview re-renders, so glass comes and goes). Hyalite.watch would attach all ~300 at load.

@@ -1,6 +1,134 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Prototypes</title>
-<style>body{font:14px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro",system-ui,sans-serif;color:#1d1d1f;background:#fefefe;margin:40px auto;max-width:760px}
-h2{border-top:1px solid #d2d2d7;padding-top:24px;margin-top:40px}small{color:#6e6e73;font-weight:400}
-h3{margin:20px 0 4px;font-size:13px;color:#6e6e73}ul{margin:0;padding-left:20px}a{color:#1d1d1f}</style></head>
-<body><h1>Prototypes</h1><section><h2>hyalite <small>7 pages</small></h2><h3>03-ios</h3><ul><li><a href="hyalite/03-ios/components.html">components</a></li></ul><h3>04-macos</h3><ul><li><a href="hyalite/04-macos/components.html">components</a></li></ul><h3>05-standard</h3><ul><li><a href="hyalite/05-standard/standard.html">standard</a></li></ul><h3>06-standard-macos</h3><ul><li><a href="hyalite/06-standard-macos/standard-macos.html">standard-macos</a></li></ul><h3>07-ios-more</h3><ul><li><a href="hyalite/07-ios-more/ios-more.html">ios-more</a></li></ul><h3>08-macos-more</h3><ul><li><a href="hyalite/08-macos-more/macos-more.html">macos-more</a></li></ul><h3>09-json-render</h3><ul><li><a href="hyalite/09-json-render/json-render.html">json-render</a></li></ul></section></body></html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apple 界面原型 · Liquid Glass</title>
+<style>
+:root{--ink:#1d1d1f;--dim:#6e6e73;--rule:#e5e5ea;--paper:#fbfbfd}
+*{box-sizing:border-box}
+body{margin:0;padding:72px 24px 96px;font:15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro",system-ui,sans-serif;color:var(--ink);min-height:100vh;
+  background:radial-gradient(1100px 560px at 8% -12%,#e9f1ff 0%,transparent 62%),
+             radial-gradient(900px 520px at 94% -6%,#f7ecff 0%,transparent 58%),var(--paper)}
+.wrap{max-width:1060px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border:1px solid var(--rule);border-radius:999px;background:#fff;
+  font-size:11.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.dot{width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#0a84ff,#64d2ff)}
+h1{margin:22px 0 12px;font-size:clamp(30px,4.6vw,46px);line-height:1.06;letter-spacing:-.025em;font-weight:700}
+.lead{margin:0;max-width:640px;font-size:16px;line-height:1.6;color:var(--dim)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:16px;margin-top:44px;align-items:stretch}
+.card{position:relative;display:flex;flex-direction:column;gap:14px;overflow:hidden;padding:22px 20px 18px;
+  color:inherit;text-decoration:none;background:#fff;border:1px solid var(--rule);border-radius:18px;
+  box-shadow:0 1px 2px rgb(0 0 0 / 4%),0 10px 30px -22px rgb(0 0 0 / 40%);
+  transition:transform .22s cubic-bezier(.22,.68,0,1),box-shadow .22s,border-color .22s}
+.card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--tint);opacity:.85}
+.card:hover{transform:translateY(-3px);border-color:#d6d6db;box-shadow:0 2px 4px rgb(0 0 0 / 5%),0 20px 42px -22px rgb(0 0 0 / 34%)}
+.body{flex:1}
+.kind{display:block;margin-bottom:8px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a1a1a6}
+.card h3{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.card p{margin:0;font-size:13.5px;line-height:1.55;color:var(--dim)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{padding:3px 9px;border-radius:999px;background:#f2f2f7;font-size:11.5px;font-weight:500;color:#48484a}
+.open{flex:none;font-size:12px;color:#b0b0b5;transition:color .2s,transform .2s}
+.card:hover .open{color:var(--ink);transform:translateX(2px)}
+footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin-top:58px;padding-top:20px;
+  border-top:1px solid var(--rule);font-size:12.5px;color:#a1a1a6}
+@media (max-width:640px){
+  body{padding:44px 18px 64px}
+  h1{font-size:32px}
+  .grid{grid-template-columns:1fr;gap:12px;margin-top:32px}
+  .card{padding:18px 16px 16px}
+  footer{margin-top:40px}
+}
+@media (prefers-reduced-motion:reduce){.card,.card:hover{transition:none;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow"><span class="dot"></span>Liquid Glass · 网页原型</span>
+  <h1>Apple 界面原型</h1>
+  <p class="lead">用 TSX 画 iOS 27 / macOS 27 的界面，构建成自包含的单文件 HTML。玻璃是 hyalite 引擎的实时折射，参数取自 Figma 的实测值。</p>
+  <div class="grid">
+      <a class="card" href="hyalite/standard/ios-macos.html" style="--tint:linear-gradient(90deg,#0a84ff,#64d2ff)">
+        <div class="body">
+          <span class="kind">标准页</span>
+          <h3>标准页 · iOS + macOS</h3>
+          <p>两平台全部组件，标准玻璃参数，没有调节面板。引擎和两张壁纸都内联在一个文件里，可以直接发到手机。</p>
+        </div>
+        <div class="foot">
+          <div class="tags"><span>iOS 27</span><span>macOS 27</span><span>无面板</span></div>
+          <span class="open">打开 →</span>
+        </div>
+      </a>
+      <a class="card" href="hyalite/standard/macos.html" style="--tint:linear-gradient(90deg,#0a84ff,#64d2ff)">
+        <div class="body">
+          <span class="kind">标准页</span>
+          <h3>标准页 · macOS</h3>
+          <p>同上，只收 macOS 组件：窗口与浮动侧边栏、工具栏、按钮、分段、弹窗。</p>
+        </div>
+        <div class="foot">
+          <div class="tags"><span>macOS 27</span><span>无面板</span></div>
+          <span class="open">打开 →</span>
+        </div>
+      </a>
+      <a class="card" href="hyalite/lab/ios.html" style="--tint:linear-gradient(90deg,#bf5af2,#e07cf0)">
+        <div class="body">
+          <span class="kind">实验台</span>
+          <h3>iOS 实验台</h3>
+          <p>16 个玻璃滑杆实时调参，5 个预设，9 种底图，还有帧率测试。定好档位后可以一键复制成标准参数。</p>
+        </div>
+        <div class="foot">
+          <div class="tags"><span>iOS 27</span><span>参数面板</span><span>预设</span><span>帧率</span></div>
+          <span class="open">打开 →</span>
+        </div>
+      </a>
+      <a class="card" href="hyalite/lab/macos.html" style="--tint:linear-gradient(90deg,#bf5af2,#e07cf0)">
+        <div class="body">
+          <span class="kind">实验台</span>
+          <h3>macOS 实验台</h3>
+          <p>和 iOS 实验台同一套面板，换掉的是 macOS 组件和它们的底图。</p>
+        </div>
+        <div class="foot">
+          <div class="tags"><span>macOS 27</span><span>参数面板</span></div>
+          <span class="open">打开 →</span>
+        </div>
+      </a>
+      <a class="card" href="hyalite/showcase/ios.html" style="--tint:linear-gradient(90deg,#30d158,#7ee08a)">
+        <div class="body">
+          <span class="kind">组件补充</span>
+          <h3>iOS 组件补充</h3>
+          <p>标准页之外的第二批 iOS 27 组件，用标准玻璃画，尺寸仍按 Figma 的规格。</p>
+        </div>
+        <div class="foot">
+          <div class="tags"><span>iOS 27</span><span>标准玻璃</span></div>
+          <span class="open">打开 →</span>
+        </div>
+      </a>
+      <a class="card" href="hyalite/showcase/macos.html" style="--tint:linear-gradient(90deg,#30d158,#7ee08a)">
+        <div class="body">
+          <span class="kind">组件补充</span>
+          <h3>macOS 组件补充</h3>
+          <p>标准页之外的第二批 macOS 27 组件，同样用标准玻璃。</p>
+        </div>
+        <div class="foot">
+          <div class="tags"><span>macOS 27</span><span>标准玻璃</span></div>
+          <span class="open">打开 →</span>
+        </div>
+      </a>
+      <a class="card" href="hyalite/json-render/index.html" style="--tint:linear-gradient(90deg,#ff9f0a,#ffd60a)">
+        <div class="body">
+          <span class="kind">JSON 渲染</span>
+          <h3>json-render 玻璃版</h3>
+          <p>每个组件左边是它的 JSON、右边是渲染结果；另有三屏 AI 对话和粘贴 JSON 预览。</p>
+        </div>
+        <div class="foot">
+          <div class="tags"><span>iOS 27</span><span>JSON</span><span>AI 对话</span></div>
+          <span class="open">打开 →</span>
+        </div>
+      </a>
+  </div>
+  <footer><span>7 个页面 · 全部单文件，CSS / JS / 壁纸内联</span><span>构建：./design/build.sh</span></footer>
+</div>
+</body>
+</html>

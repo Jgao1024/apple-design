@@ -5,7 +5,7 @@ import { TrafficLights } from "../../macos27/components/traffic-lights.tsx";
 import { Glass } from "./glass.tsx";
 import { PushButton, SwitchTrack, ToolbarButton, ToolbarSearch, ToolbarSegmented } from "./macos.tsx";
 
-// The rest of the macOS 27 components (pages/08-macos-more), drawn with the standard glass. Geometry is
+// The rest of the macOS 27 components (pages/showcase/macos), drawn with the standard glass. Geometry is
 // the macos27 kit's, from the Figma specs as recorded in design/system/macos27/components/*.tsx:
 //   menu bar 45 high, parts 24 high from 10 px, 13 pt; selected part a pill 8 px wider
 //   Dock 55 high radius 15, icons 36 with 9 px gaps, 8 px in; running dot 4 px #707070 3 px below

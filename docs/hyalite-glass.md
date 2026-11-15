@@ -7,14 +7,14 @@
 
 ## 页面
 
-构建：`./design/build.sh hyalite`。产物在 `design/pages/hyalite/`，用 Chrome 打开。
+构建：`./design/build.sh`。产物在 `design/pages/hyalite/`，用 Chrome 打开，或直接看 https://jgao1024.github.io/apple-design/ 。
 
 | 页面 | 用途 |
 |---|---|
-| `05-standard/standard.html` | **标准页**。iOS 和 macOS 全部组件，用标准参数，没有调节面板。单文件（约 1.3 MB），引擎、脚本、两张壁纸都内联，可以直接发给别人或传到手机 |
-| `06-standard-macos/standard-macos.html` | 同上，只有 macOS 组件（约 1.2 MB） |
-| `03-ios/components.html` | iOS 实验台：同样的组件，加参数面板、5 个预设、9 种底图、帧率测试 |
-| `04-macos/components.html` | macOS 实验台，结构同上 |
+| `standard/ios-macos.html` | **标准页**。iOS 和 macOS 全部组件，用标准参数，没有调节面板。单文件（约 1.3 MB），引擎、脚本、两张壁纸都内联，可以直接发给别人或传到手机 |
+| `standard/macos.html` | 同上，只有 macOS 组件（约 1.2 MB） |
+| `lab/ios.html` | iOS 实验台：同样的组件，加参数面板、5 个预设、9 种底图、帧率测试 |
+| `lab/macos.html` | macOS 实验台，结构同上 |
 
 ### 组件清单
 
@@ -67,7 +67,7 @@ import { Glass, GLASS_CSS } from "../../components/glass.tsx";
 
 - `mode` 决定这块玻璃用浅色还是深色那套参数；`tint` 用于 Prominent 这类有色玻璃。
 - 页面要带上 `GLASS_CSS`，并在末尾用 `<Scripts driver="standard.js" />` 加载引擎和驱动，
-  再写入 `window.HL_STANDARD`。照抄 `pages/05-standard/standard.tsx` 即可。
+  再写入 `window.HL_STANDARD`。照抄 `pages/standard/ios-macos.tsx` 即可。
 - 组件尺寸取自 Figma，现成的在 `design/system/hyalite/components/ios.tsx` 和 `macos.tsx`，
   新组件先在这两个文件里加，再放进标准页和实验台。
 
@@ -97,7 +97,7 @@ import { Glass, GLASS_CSS } from "../../components/glass.tsx";
 
 1. 在实验台上调好，点"定为标准（复制 JSON）"。
 2. 把 JSON 里的值写进 `presets.ts` 的 `GLASS_STANDARD`。
-3. `./design/build.sh hyalite`，标准页和两个实验台的"回到标准"都会更新。
+3. `./design/build.sh`，标准页和两个实验台的"回到标准"都会更新。
 
 ## 文件
 
@@ -109,12 +109,16 @@ design/system/hyalite/
   components/ios.tsx      iOS 组件        components/macos.tsx   macOS 组件
   components/lab.tsx      实验台：面板、底图、舞台、底色矩阵
   client/*.js             各页面的浏览器端驱动（构建时内联）
-  pages/                  03-ios  04-macos  05-standard  06-standard-macos  07-ios-more
+  pages/                  按分类分目录：
+    lab/                  ios.tsx  macos.tsx            参数实验台
+    standard/             ios-macos.tsx  macos.tsx      标准页（无面板）
+    showcase/             ios.tsx  macos.tsx            补充组件
+    json-render/          index.tsx                      JSON ↔ 渲染对照
   components/standard.tsx 两个标准页共用的排版和照片内联
 ```
 
 - 这个 kit 是唯一允许产物带 JS 的（`design/system/build.ts` 的 `SCRIPTED_KITS`），其他 kit 仍然是零 JS。
-- 照片底用的是本机系统壁纸，放在 `design/.ref/wallpapers/`（已 gitignore，不入库）。换一台 Mac 要重新生成：
+- 照片底用的是本机系统壁纸，放在 `design/.ref/wallpapers/`（已入库，clone 后可直接重建）。要换壁纸就重新生成：
 
 ```bash
 mkdir -p design/.ref/wallpapers

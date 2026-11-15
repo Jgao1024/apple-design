@@ -1,4 +1,4 @@
-// json-render → Liquid Glass HTML (pages/09-json-render).
+// json-render → Liquid Glass HTML (pages/json-render).
 //
 // One file, two uses: the build imports it to draw the static showcase, and the page inlines it to
 // run the paste-JSON live preview and to make the showcase interactive.

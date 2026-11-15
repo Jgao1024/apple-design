@@ -7,7 +7,7 @@ import * as mac from "./macos.tsx";
 import { Scripts, Style } from "./script.tsx";
 import { STANDARD } from "../presets.ts";
 
-// The standard pages (pages/05-standard, pages/06-standard-macos): components with the standard
+// The standard pages (pages/standard/ios-macos, pages/standard/macos): components with the standard
 // glass, as one self-contained file to send around (e.g. to a phone): no panel, the engine and both
 // wallpapers inlined, no external reference. Stages wrap to one column on a narrow screen and are
 // scaled down to fit a phone.

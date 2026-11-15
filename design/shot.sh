@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Screenshots built pages into design/shots/, mirroring design/pages/.
 #
-# Usage: ./design/shot.sh ios27/12-materials-tokens/liquid-glass   one or more pages (no .html)
-#        ./design/shot.sh ios27                                    every page of a kit
+# Usage: ./design/shot.sh hyalite/standard/ios-macos           one or more pages (no .html)
+#        ./design/shot.sh hyalite                               every page of a kit
 #
 # Chrome runs headless with a window of WIDTH x HEIGHT; a taller page is cut off, so raise
 # HEIGHT (default 2400) for long pages. Set CHROME to use another Chromium.

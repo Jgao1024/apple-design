@@ -1,4 +1,4 @@
-// Driver for pages/05-standard: no panel. Applies the standard (window.HL_STANDARD, from presets.ts)
+// Driver for pages/standard/ios-macos: no panel. Applies the standard (window.HL_STANDARD, from presets.ts)
 // to every .hl-glass by its data-mode, and shows the notice where SVG backdrop filters do not run
 // (every browser on iPhone and iPad is WebKit, which keeps only the blur).
 (() => {

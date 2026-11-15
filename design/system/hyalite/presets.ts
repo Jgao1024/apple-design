@@ -1,4 +1,4 @@
-// Glass parameter sets for the component labs (pages/03-ios, pages/04-macos).
+// Glass parameter sets for the component labs (pages/lab/ios, pages/lab/macos).
 // A set is hyalite's engine options plus three fill values per mode:
 //   tone    grey level of the fill, 0–255     fill    fill alpha, 0–1     shadow  drop shadow alpha, 0–1
 // The panel's "定为标准" button copies the current Light + Dark sets as JSON; paste it into
