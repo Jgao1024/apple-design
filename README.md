@@ -51,6 +51,23 @@ docs/                hyalite 玻璃标准（参数真源）
 | `08-macos-more/macos-more.html` | macOS 27 补充组件（标准玻璃，无面板） |
 | `09-json-render/json-render.html` | json-render 玻璃版：每个组件左边 JSON 右边渲染，外加三屏 AI 对话和粘贴 JSON 预览 |
 
+## 在线访问（GitHub Pages）
+
+`design/pages/` 就是站点根目录，由 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) 发布，推到 `main` 后约 30 秒生效：
+
+| 页面 | 链接 |
+|---|---|
+| 索引 | https://jgao1024.github.io/apple-design/ |
+| 标准页 iOS + macOS | https://jgao1024.github.io/apple-design/hyalite/05-standard/standard.html |
+| 标准页 macOS | https://jgao1024.github.io/apple-design/hyalite/06-standard-macos/standard-macos.html |
+| iOS 实验台 | https://jgao1024.github.io/apple-design/hyalite/03-ios/components.html |
+| macOS 实验台 | https://jgao1024.github.io/apple-design/hyalite/04-macos/components.html |
+| iOS 补充 | https://jgao1024.github.io/apple-design/hyalite/07-ios-more/ios-more.html |
+| macOS 补充 | https://jgao1024.github.io/apple-design/hyalite/08-macos-more/macos-more.html |
+| json-render | https://jgao1024.github.io/apple-design/hyalite/09-json-render/json-render.html |
+
+单文件 HTML 的 CSS/JS/壁纸全内联，所以 Pages 上不需要任何额外资源；手机也能直接打开。
+
 ## 已验证
 
 ```bash
