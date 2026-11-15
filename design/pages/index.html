@@ -16,18 +16,21 @@ body{margin:0;padding:72px 24px 96px;font:15px/1.5 -apple-system,BlinkMacSystemF
 .dot{width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#0a84ff,#64d2ff)}
 h1{margin:22px 0 12px;font-size:clamp(30px,4.6vw,46px);line-height:1.06;letter-spacing:-.025em;font-weight:700}
 .lead{margin:0;max-width:640px;font-size:16px;line-height:1.6;color:var(--dim)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:16px;margin-top:44px;align-items:stretch}
-.card{position:relative;display:flex;flex-direction:column;gap:14px;overflow:hidden;padding:22px 20px 18px;
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:18px;margin-top:44px;align-items:stretch}
+.card{position:relative;display:flex;flex-direction:column;gap:13px;overflow:hidden;padding:12px 12px 14px;
   color:inherit;text-decoration:none;background:#fff;border:1px solid var(--rule);border-radius:18px;
   box-shadow:0 1px 2px rgb(0 0 0 / 4%),0 10px 30px -22px rgb(0 0 0 / 40%);
   transition:transform .22s cubic-bezier(.22,.68,0,1),box-shadow .22s,border-color .22s}
-.card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--tint);opacity:.85}
+.shot{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--tint);
+  box-shadow:inset 0 0 0 1px rgb(0 0 0 / 6%)}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s cubic-bezier(.22,.68,0,1)}
+.card:hover .shot img{transform:scale(1.035)}
 .card:hover{transform:translateY(-3px);border-color:#d6d6db;box-shadow:0 2px 4px rgb(0 0 0 / 5%),0 20px 42px -22px rgb(0 0 0 / 34%)}
-.body{flex:1}
+.body{flex:1;padding:2px 6px 0}
 .kind{display:block;margin-bottom:8px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a1a1a6}
 .card h3{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.01em}
 .card p{margin:0;font-size:13.5px;line-height:1.55;color:var(--dim)}
-.foot{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 6px}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tags span{padding:3px 9px;border-radius:999px;background:#f2f2f7;font-size:11.5px;font-weight:500;color:#48484a}
 .open{flex:none;font-size:12px;color:#b0b0b5;transition:color .2s,transform .2s}
@@ -41,7 +44,7 @@ footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin
   .card{padding:18px 16px 16px}
   footer{margin-top:40px}
 }
-@media (prefers-reduced-motion:reduce){.card,.card:hover{transition:none;transform:none}}
+@media (prefers-reduced-motion:reduce){.card,.card:hover,.shot img{transition:none;transform:none}}
 </style>
 </head>
 <body>
@@ -51,6 +54,7 @@ footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin
   <p class="lead">用 TSX 画 iOS 27 / macOS 27 的界面，构建成自包含的单文件 HTML。玻璃是 hyalite 引擎的实时折射，参数取自 Figma 的实测值。</p>
   <div class="grid">
       <a class="card" href="hyalite/standard/ios-macos.html" style="--tint:linear-gradient(90deg,#0a84ff,#64d2ff)">
+        <div class="shot"><img src="assets/covers/standard-ios-macos.jpg" alt="" width="960" height="540"></div>
         <div class="body">
           <span class="kind">标准页</span>
           <h3>标准页 · iOS + macOS</h3>
@@ -62,6 +66,7 @@ footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin
         </div>
       </a>
       <a class="card" href="hyalite/standard/macos.html" style="--tint:linear-gradient(90deg,#0a84ff,#64d2ff)">
+        <div class="shot"><img src="assets/covers/standard-macos.jpg" alt="" width="960" height="540"></div>
         <div class="body">
           <span class="kind">标准页</span>
           <h3>标准页 · macOS</h3>
@@ -73,6 +78,7 @@ footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin
         </div>
       </a>
       <a class="card" href="hyalite/lab/ios.html" style="--tint:linear-gradient(90deg,#bf5af2,#e07cf0)">
+        <div class="shot"><img src="assets/covers/lab-ios.jpg" alt="" width="960" height="540"></div>
         <div class="body">
           <span class="kind">实验台</span>
           <h3>iOS 实验台</h3>
@@ -84,6 +90,7 @@ footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin
         </div>
       </a>
       <a class="card" href="hyalite/lab/macos.html" style="--tint:linear-gradient(90deg,#bf5af2,#e07cf0)">
+        <div class="shot"><img src="assets/covers/lab-macos.jpg" alt="" width="960" height="540"></div>
         <div class="body">
           <span class="kind">实验台</span>
           <h3>macOS 实验台</h3>
@@ -95,6 +102,7 @@ footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin
         </div>
       </a>
       <a class="card" href="hyalite/showcase/ios.html" style="--tint:linear-gradient(90deg,#30d158,#7ee08a)">
+        <div class="shot"><img src="assets/covers/showcase-ios.jpg" alt="" width="960" height="540"></div>
         <div class="body">
           <span class="kind">组件补充</span>
           <h3>iOS 组件补充</h3>
@@ -106,6 +114,7 @@ footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin
         </div>
       </a>
       <a class="card" href="hyalite/showcase/macos.html" style="--tint:linear-gradient(90deg,#30d158,#7ee08a)">
+        <div class="shot"><img src="assets/covers/showcase-macos.jpg" alt="" width="960" height="540"></div>
         <div class="body">
           <span class="kind">组件补充</span>
           <h3>macOS 组件补充</h3>
@@ -117,6 +126,7 @@ footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin
         </div>
       </a>
       <a class="card" href="hyalite/json-render/index.html" style="--tint:linear-gradient(90deg,#ff9f0a,#ffd60a)">
+        <div class="shot"><img src="assets/covers/json-render-index.jpg" alt="" width="960" height="540"></div>
         <div class="body">
           <span class="kind">JSON 渲染</span>
           <h3>json-render 玻璃版</h3>

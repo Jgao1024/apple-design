@@ -9,3 +9,6 @@ design/.deno/
 # Headless-Chrome profile + screenshots
 design/.chrome-tmp/
 design/shots/
+
+# 首页卡片的截图中间产物（.jpg 才是入库的那份）
+design/.covers/

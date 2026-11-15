@@ -163,6 +163,36 @@ const cardFor = (name: string): Card =>
     tags: [],
   };
 
+// Cover shots for the index cards: system/<kit>/covers/*.tsx -> design/.covers/<name>.html.
+// design/covers.sh screenshots those into design/pages/assets/covers/<name>.jpg.
+const coversDirectory = new URL(`./${requested[0]}/covers/`, systemDirectory);
+const coversOutput = new URL("../.covers/", distDirectory);
+const coverStylesheet = await stylesheetFor(requested[0]);
+try {
+  await Deno.mkdir(coversOutput, { recursive: true });
+  const names = [...Deno.readDirSync(coversDirectory)]
+    .filter((entry) => entry.isFile && entry.name.endsWith(".tsx") && entry.name !== "cover.tsx")
+    .map((entry) => entry.name.replace(/\.tsx$/, ""))
+    .sort();
+  for (const name of names) {
+    const module = await import(new URL(`${name}.tsx`, coversDirectory).href);
+    const markup = module.default().html;
+    const classes = [...markup.matchAll(/\bclass="([^"]*)"/g)].flatMap((match) =>
+      unescapeAttribute(match[1]).split(/\s+/)
+    );
+    const css = (await compile(coverStylesheet)).build(classes);
+    const html = `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>cover ${name}</title>
+<style>${css}</style><style>body{margin:0;background:#0b0d14}</style></head>
+<body>${markup}</body></html>
+`;
+    await Deno.writeTextFile(new URL(`./${name}.html`, coversOutput), html);
+    console.log(`.covers/${name}.html`);
+  }
+} catch (error) {
+  if (!(error instanceof Deno.errors.NotFound)) throw error;
+}
+
 await writeIndexes();
 
 /// Lists every built page as a card gallery. Scans the output on disk, so a page that was just added
@@ -185,7 +215,10 @@ async function writeIndexes(): Promise<void> {
   };
   const ordered = [...cards].sort((a, b) => rank(a.card) - rank(b.card) || a.card.title.localeCompare(b.card.title, "zh-Hans-CN"));
 
-  const gallery = ordered.map(({ href, card }) => `      <a class="card" href="${href}" style="--tint:${GROUP_TINT[card.group] ?? GROUP_TINT["其他"]}">
+  const gallery = ordered.map(({ href, card }) => {
+    const cover = href.slice(href.indexOf("/") + 1).replace(/\.html$/, "").replaceAll("/", "-");
+    return `      <a class="card" href="${href}" style="--tint:${GROUP_TINT[card.group] ?? GROUP_TINT["其他"]}">
+        <div class="shot"><img src="assets/covers/${cover}.jpg" alt="" width="960" height="540"></div>
         <div class="body">
           <span class="kind">${card.group}</span>
           <h3>${card.title}</h3>
@@ -195,7 +228,8 @@ async function writeIndexes(): Promise<void> {
           <div class="tags">${card.tags.map((tag) => `<span>${tag}</span>`).join("")}</div>
           <span class="open">打开 →</span>
         </div>
-      </a>`).join("\n");
+      </a>`;
+  }).join("\n");
 
   const html = `<!doctype html>
 <html lang="zh-CN">
@@ -215,18 +249,21 @@ body{margin:0;padding:72px 24px 96px;font:15px/1.5 ${FONT_SANS};color:var(--ink)
 .dot{width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#0a84ff,#64d2ff)}
 h1{margin:22px 0 12px;font-size:clamp(30px,4.6vw,46px);line-height:1.06;letter-spacing:-.025em;font-weight:700}
 .lead{margin:0;max-width:640px;font-size:16px;line-height:1.6;color:var(--dim)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:16px;margin-top:44px;align-items:stretch}
-.card{position:relative;display:flex;flex-direction:column;gap:14px;overflow:hidden;padding:22px 20px 18px;
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:18px;margin-top:44px;align-items:stretch}
+.card{position:relative;display:flex;flex-direction:column;gap:13px;overflow:hidden;padding:12px 12px 14px;
   color:inherit;text-decoration:none;background:#fff;border:1px solid var(--rule);border-radius:18px;
   box-shadow:0 1px 2px rgb(0 0 0 / 4%),0 10px 30px -22px rgb(0 0 0 / 40%);
   transition:transform .22s cubic-bezier(.22,.68,0,1),box-shadow .22s,border-color .22s}
-.card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--tint);opacity:.85}
+.shot{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--tint);
+  box-shadow:inset 0 0 0 1px rgb(0 0 0 / 6%)}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s cubic-bezier(.22,.68,0,1)}
+.card:hover .shot img{transform:scale(1.035)}
 .card:hover{transform:translateY(-3px);border-color:#d6d6db;box-shadow:0 2px 4px rgb(0 0 0 / 5%),0 20px 42px -22px rgb(0 0 0 / 34%)}
-.body{flex:1}
+.body{flex:1;padding:2px 6px 0}
 .kind{display:block;margin-bottom:8px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a1a1a6}
 .card h3{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.01em}
 .card p{margin:0;font-size:13.5px;line-height:1.55;color:var(--dim)}
-.foot{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 6px}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tags span{padding:3px 9px;border-radius:999px;background:#f2f2f7;font-size:11.5px;font-weight:500;color:#48484a}
 .open{flex:none;font-size:12px;color:#b0b0b5;transition:color .2s,transform .2s}
@@ -240,7 +277,7 @@ footer{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin
   .card{padding:18px 16px 16px}
   footer{margin-top:40px}
 }
-@media (prefers-reduced-motion:reduce){.card,.card:hover{transition:none;transform:none}}
+@media (prefers-reduced-motion:reduce){.card,.card:hover,.shot img{transition:none;transform:none}}
 </style>
 </head>
 <body>

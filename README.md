@@ -42,10 +42,12 @@ design/
       presets.ts     玻璃参数预设（STANDARD 是标准档，参数真源）
       components/    glass / ios / macos / lab / standard / hud / script / gallery / ios-more / macos-more / jr-specs
       pages/         lab/  standard/  showcase/  json-render/
+      covers/        首页缩略图的构图（每张 1200×675，两块壁纸 + 该页组件）
       client/        各页面的浏览器端驱动（构建时内联）
       vendor/        hyalite 引擎，原样引入（MIT）
     ios27/ macos27/ doubao/   图标、交通灯、chrome、theme 等共用零件
   pages/             构建产物（已入库，`index.html` 是首页卡片）
+    assets/covers/   首页卡片上的缩略图（7 张 JPG，由 covers.sh 生成）
   .ref/wallpapers/   两张壁纸底图（已入库，构建时内联）
 .dsh/skills/         ui-design / general-rules：画原型时的工作方法
 docs/                Liquid Glass 标准与参数表
@@ -57,13 +59,14 @@ docs/                Liquid Glass 标准与参数表
 ./design/build.sh                  # 全部页面，约 10 秒
 ./design/build.sh hyalite          # 显式指定 kit
 ./design/shot.sh hyalite/lab/ios   # 截图到 design/shots/
+./design/covers.sh                 # 重画首页卡片的缩略图（改了组件之后要跑）
 ```
 
 改了 `design/system/**` 必须重跑构建 —— 提交的 HTML 不会自己更新。首次换机时 `build.sh` 会自动下载 Deno（经 `127.0.0.1:7897` 代理），之后离线可跑。
 
 ## 约定
 
-- 页面目录按分类命名（`lab/ios`、`standard/ios-macos`），不再用序号；新增页面放进对应分类，首页会自动多一张卡片。
+- 页面目录按分类命名（`lab/ios`、`standard/ios-macos`），不再用序号；新增页面放对应分类，首页会自动多一张卡片，再给它加一张缩略图（`covers/<分类>-<名字>.tsx`）。
 - 视觉尺寸、颜色、字号一律照 Figma 规格，不估数字；玻璃只用 `components/glass.tsx` 的 `Glass` 画。
 - 提交内容 = 源码 + 构建出的 HTML。`design/.bin/`、`design/.deno/`、`design/shots/`、`design/.chrome-tmp/` 不入库。
 - 参数改动走 `presets.ts`，改完重跑构建，四个页面一起更新。
